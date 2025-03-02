@@ -1,10 +1,7 @@
 use crate::state::ComplianceState;
 use anchor_lang::prelude::*;
-use solana_program::account_info::next_account_info;
-
 use solana_program::instruction::Instruction;
 use solana_program::program::invoke;
-use solana_program::program_error::ProgramError;
 use solana_program::pubkey::Pubkey;
 
 #[derive(Accounts)]
@@ -26,9 +23,7 @@ pub fn process_check_compliance(ctx: Context<CheckCompliance>, user: Pubkey) -> 
 }
 
 fn check_module_compliance(module: Pubkey, user: Pubkey) -> Result<bool> {
-    let accounts = vec![];
-    let accounts_iter = &mut accounts.iter();
-    let module_account_info = next_account_info(accounts_iter)?;
+    let _accounts: Vec<AccountInfo> = vec![];
 
     let instruction = Instruction {
         program_id: module,
@@ -36,6 +31,6 @@ fn check_module_compliance(module: Pubkey, user: Pubkey) -> Result<bool> {
         data: vec![],
     };
 
-    invoke(&instruction, &[module_account_info.clone()]).map_err(|_| ProgramError::Custom(1))?;
+    invoke(&instruction, &[]).map_err(|_| ProgramError::Custom(1))?;
     Ok(true)
 }
