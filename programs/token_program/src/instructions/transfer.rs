@@ -7,7 +7,7 @@ use anchor_spl::{
     associated_token::AssociatedToken,
     token::{transfer, Mint, Token, TokenAccount, Transfer},
 };
-use std::str::FromStr; // Import necessário
+use std::str::FromStr;
 
 #[derive(Accounts)]
 pub struct TransferTokens<'info> {
@@ -41,7 +41,7 @@ pub struct TransferTokens<'info> {
 
     /// CHECK: Compliance program to be called via CPI
     #[account(address = Pubkey::new_from_array(
-        Pubkey::from_str("EBrwd8JEmXP2M4YRbhdTP1zuSj4cm9W4MzMNf6eMAUAA").unwrap().to_bytes()
+        Pubkey::from_str("78ZVaqUpKoWduqWujw5HqFWi77qsTSLnpq3TMvbtbLyN").unwrap().to_bytes()
     ))]
     pub compliance_program: UncheckedAccount<'info>,
 

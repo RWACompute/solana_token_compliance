@@ -1,10 +1,21 @@
 {
   "compilerOptions": {
-    "types": ["mocha", "chai"],
-    "typeRoots": ["./node_modules/@types"],
-    "lib": ["es2015"],
     "module": "commonjs",
-    "target": "es6",
-    "esModuleInterop": true
-  }
+    // Escolha um target razoável (ES2016 ou superior)
+    "target": "es2021",
+    // Coloque bibliotecas do ECMAScript
+    "lib": [
+      "ES2021"
+    ],
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "types": [
+      "node",
+      "mocha"
+    ]
+  },
+  "include": [
+    "tests/**/*.ts"
+  ]
 }

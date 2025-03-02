@@ -3,7 +3,7 @@ use anchor_lang::prelude::*;
 
 #[derive(Accounts)]
 pub struct Initialize<'info> {
-    #[account(init, payer = authority, space = 8 + 128)]
+    #[account(init, payer = authority, space = 8 + 200)]
     pub geo_state: Account<'info, GeoState>,
     #[account(mut)]
     pub authority: Signer<'info>,
@@ -12,6 +12,8 @@ pub struct Initialize<'info> {
 
 pub fn process_initialize(ctx: Context<Initialize>) -> Result<()> {
     let geo_state = &mut ctx.accounts.geo_state;
+    // Salva o authority
+    geo_state.authority = ctx.accounts.authority.key();
     geo_state.compliance_contract = Pubkey::default();
     geo_state.is_bound = false;
     geo_state.restricted_countries = Vec::new();

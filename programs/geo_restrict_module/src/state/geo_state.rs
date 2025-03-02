@@ -4,6 +4,8 @@ use anchor_lang::prelude::*;
 #[account]
 pub struct GeoState {
     // The address of the `modular_compliance` program.
+    pub authority: Pubkey,
+    // The address of the compliance State program.
     pub compliance_contract: Pubkey,
     // Indicates whether the geo-restrictions are bound to the compliance program.
     pub is_bound: bool,

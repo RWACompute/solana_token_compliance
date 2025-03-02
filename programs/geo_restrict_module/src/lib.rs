@@ -8,6 +8,7 @@ use instructions::bind_compliance::*;
 use instructions::check_compliance::*;
 use instructions::initialize::*;
 use instructions::is_bound::*;
+use instructions::set_countries_allowed::*;
 use instructions::unbind_compliance::*;
 
 declare_id!("HYd7fRvoLw6nxVVZuUsnVy6w8aDDrhUpznCkTQL2D3RY");
@@ -34,5 +35,12 @@ pub mod geo_restrict_module {
 
     pub fn is_bound(ctx: Context<IsBound>) -> Result<bool> {
         process_is_bound(ctx)
+    }
+
+    pub fn set_restricted_countries(
+        ctx: Context<SetRestrictedCountries>,
+        countries: Vec<String>,
+    ) -> Result<()> {
+        process_set_restricted_countries(ctx, countries)
     }
 }

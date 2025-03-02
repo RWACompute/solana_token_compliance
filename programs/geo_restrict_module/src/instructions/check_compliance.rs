@@ -12,6 +12,7 @@ pub fn process_check_compliance(
 ) -> Result<bool> {
     let geo_state = &ctx.accounts.geo_state;
 
+    // Se o país estiver em restricted_countries, bloqueia
     if geo_state.restricted_countries.contains(&user_country) {
         msg!("🚫 Transaction blocked for country: {}", user_country);
         return Ok(false);
