@@ -1,8 +1,12 @@
 {
-  "license": "ISC",  
+  "license": "ISC",
   "scripts": {
     "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
-    "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check"
+    "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check",
+    "b:full": "anchor build",
+    "b:lite": "anchor build --skip-lint",
+    "release": "cargo build --release",
+    "test": "anchor test --skip-validador-test"
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.30.1"
