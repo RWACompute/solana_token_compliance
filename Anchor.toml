@@ -5,6 +5,7 @@ members = [
     "programs/geo_restrict_module",
     "programs/kyc_module",
     "programs/modular_compliance",
+    "programs/token_program",
 ]
 
 [features]
@@ -15,6 +16,7 @@ skip-lint = false
 modular_compliance = "EBrwd8JEmXP2M4YRbhdTP1zuSj4cm9W4MzMNf6eMAUAA"
 kyc_module = "BXGeVsqLrbTQ7dPAd1a12bA7zuewNKHi3rPpaF7qWov7"
 geo_restrict_module = "scBwKWSo8RN9VHM629PWSu9kPGDaRzBZgqYQSEoipfe"
+token_program = "6WdJw7xm3HApNZcNCXrdo5pApiUjjWyVsCsLgDVbi3MH"
 
 [registry]
 url = "https://api.apr.dev"
