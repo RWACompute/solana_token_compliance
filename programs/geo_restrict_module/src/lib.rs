@@ -1,6 +1,7 @@
+#![allow(unexpected_cfgs)]
 use anchor_lang::prelude::*;
 
-declare_id!("");
+declare_id!("scBwKWSo8RN9VHM629PWSu9kPGDaRzBZgqYQSEoipfe");
 
 #[program]
 pub mod geo_restrict_module {

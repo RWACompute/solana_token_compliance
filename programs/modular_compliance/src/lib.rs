@@ -1,6 +1,7 @@
+#![allow(unexpected_cfgs)]
 use anchor_lang::prelude::*;
 
-declare_id!("");
+declare_id!("EBrwd8JEmXP2M4YRbhdTP1zuSj4cm9W4MzMNf6eMAUAA");
 
 #[program]
 pub mod modular_compliance {
