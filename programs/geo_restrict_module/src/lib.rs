@@ -1,12 +1,13 @@
+#![allow(unexpected_cfgs)]
 use anchor_lang::prelude::*;
 
 pub mod instructions;
-pub mod interface;
 pub mod state;
 
 use instructions::bind_compliance::*;
 use instructions::check_compliance::*;
 use instructions::initialize::*;
+use instructions::is_bound::*;
 use instructions::unbind_compliance::*;
 
 declare_id!("scBwKWSo8RN9VHM629PWSu9kPGDaRzBZgqYQSEoipfe");
@@ -29,5 +30,9 @@ pub mod geo_restrict_module {
 
     pub fn unbind_compliance(ctx: Context<UnbindCompliance>) -> Result<()> {
         process_unbind_compliance(ctx)
+    }
+
+    pub fn is_bound(ctx: Context<IsBound>) -> Result<bool> {
+        process_is_bound(ctx)
     }
 }
