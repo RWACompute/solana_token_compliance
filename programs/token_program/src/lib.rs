@@ -6,7 +6,7 @@ pub mod instructions;
 
 use instructions::*;
 
-declare_id!("nHi9DdNjuupjQ3c8AJU9sChB5gLbZvTLsJQouY4hU67");
+declare_id!("4u4wGUQDzFFh7Hnnk2wt8SN3HkhfcFbRfUyvnjxkTkn8");
 
 #[program]
 pub mod token_program {

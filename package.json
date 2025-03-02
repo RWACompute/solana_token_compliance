@@ -8,7 +8,7 @@
     "b:full": "anchor build",
     "b:lite": "anchor build --skip-lint",
     "release": "cargo build --release",
-    "test": "anchor test --skip-validador-test"
+    "test": "anchor test --skip-local-validator"
   },
   "dependencies": {
     "@coral-xyz/anchor": "^0.30.1"

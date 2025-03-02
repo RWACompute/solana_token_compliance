@@ -13,10 +13,11 @@ resolution = true
 skip-lint = false
 
 [programs.localnet]
-modular_compliance = "EBrwd8JEmXP2M4YRbhdTP1zuSj4cm9W4MzMNf6eMAUAA"
-kyc_module = "BXGeVsqLrbTQ7dPAd1a12bA7zuewNKHi3rPpaF7qWov7"
-geo_restrict_module = "scBwKWSo8RN9VHM629PWSu9kPGDaRzBZgqYQSEoipfe"
-token_program = "6WdJw7xm3HApNZcNCXrdo5pApiUjjWyVsCsLgDVbi3MH"
+geo_restrict_module = "HYd7fRvoLw6nxVVZuUsnVy6w8aDDrhUpznCkTQL2D3RY"
+kyc_module = "93r3snAcjiLiAkjN3yNdqgxnhbetVGMm4rGrxPSkdbft"
+modular_compliance = "78ZVaqUpKoWduqWujw5HqFWi77qsTSLnpq3TMvbtbLyN"
+token_program = "4u4wGUQDzFFh7Hnnk2wt8SN3HkhfcFbRfUyvnjxkTkn8"
+token_metadata_program = "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
 
 [registry]
 url = "https://api.apr.dev"
@@ -25,5 +26,9 @@ url = "https://api.apr.dev"
 cluster = "Localnet"
 wallet = "./wallets/phantom-keypair.json"
 
-# [scripts]
-# test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+[scripts]
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+
+[[test.genesis]]
+address = "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
+program = "tests/metaplex_token_metadata_program.so"

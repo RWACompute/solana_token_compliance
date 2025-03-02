@@ -10,7 +10,7 @@ use instructions::check_compliance::*;
 use instructions::initialize::*;
 use instructions::remove_module::*;
 
-declare_id!("EBrwd8JEmXP2M4YRbhdTP1zuSj4cm9W4MzMNf6eMAUAA");
+declare_id!("78ZVaqUpKoWduqWujw5HqFWi77qsTSLnpq3TMvbtbLyN");
 
 #[program]
 pub mod modular_compliance {

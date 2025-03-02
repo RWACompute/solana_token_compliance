@@ -10,7 +10,7 @@ use instructions::initialize::*;
 use instructions::is_bound::*;
 use instructions::unbind_compliance::*;
 
-declare_id!("scBwKWSo8RN9VHM629PWSu9kPGDaRzBZgqYQSEoipfe");
+declare_id!("HYd7fRvoLw6nxVVZuUsnVy6w8aDDrhUpznCkTQL2D3RY");
 
 #[program]
 pub mod geo_restrict_module {
