@@ -3,7 +3,11 @@ use anchor_lang::prelude::*;
 
 #[derive(Accounts)]
 pub struct Initialize<'info> {
-    #[account(init, payer = authority, space = 8 + 64)]
+    #[account(
+        init,
+        payer = authority,
+        space = 8 + 32 + 4 + (32 * 20) // Support up to 20 modules
+    )]
     pub compliance_state: Account<'info, ComplianceState>,
     #[account(mut)]
     pub authority: Signer<'info>,
