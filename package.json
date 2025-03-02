@@ -1,6 +1,7 @@
 {
   "license": "ISC",
   "scripts": {
+    "c:modular_compliance": "cargo build --release --package modular_compliance",
     "lint:fix": "prettier */*.js \"*/**/*{.js,.ts}\" -w",
     "lint": "prettier */*.js \"*/**/*{.js,.ts}\" --check",
     "b:full": "anchor build",

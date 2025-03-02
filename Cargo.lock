@@ -1070,6 +1070,7 @@ name = "modular_compliance"
 version = "0.1.0"
 dependencies = [
  "anchor-lang",
+ "solana-program",
 ]
 
 [[package]]
