@@ -1,6 +1,8 @@
+#![allow(unexpected_cfgs)]
 use anchor_lang::prelude::*;
 
 pub mod instructions;
+pub mod interface;
 pub mod state;
 
 use instructions::add_module::*;
