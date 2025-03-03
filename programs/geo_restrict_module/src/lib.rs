@@ -9,6 +9,7 @@ use instructions::check_compliance::*;
 use instructions::initialize::*;
 use instructions::is_bound::*;
 use instructions::set_countries_allowed::*;
+use instructions::set_user_country::*;
 use instructions::unbind_compliance::*;
 
 declare_id!("HYd7fRvoLw6nxVVZuUsnVy6w8aDDrhUpznCkTQL2D3RY");
@@ -21,8 +22,8 @@ pub mod geo_restrict_module {
         process_initialize(ctx)
     }
 
-    pub fn check_compliance(ctx: Context<CheckCompliance>, user_country: String) -> Result<bool> {
-        process_check_compliance(ctx, user_country)
+    pub fn check_compliance(ctx: Context<CheckCompliance>) -> Result<bool> {
+        process_check_compliance(ctx)
     }
 
     pub fn bind_compliance(ctx: Context<BindCompliance>, compliance: Pubkey) -> Result<()> {
@@ -35,6 +36,9 @@ pub mod geo_restrict_module {
 
     pub fn is_bound(ctx: Context<IsBound>) -> Result<bool> {
         process_is_bound(ctx)
+    }
+    pub fn set_user_country(ctx: Context<SetUserCountry>, country_code: String) -> Result<()> {
+        process_set_user_country(ctx, country_code)
     }
 
     pub fn set_restricted_countries(
