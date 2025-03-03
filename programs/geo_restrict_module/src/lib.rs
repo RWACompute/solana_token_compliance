@@ -22,8 +22,8 @@ pub mod geo_restrict_module {
         process_initialize(ctx)
     }
 
-    pub fn check_compliance(ctx: Context<CheckCompliance>) -> Result<bool> {
-        process_check_compliance(ctx)
+    pub fn check_compliance(ctx: Context<CheckCompliance>, user: Pubkey) -> Result<bool> {
+        process_check_compliance(ctx, user)
     }
 
     pub fn bind_compliance(ctx: Context<BindCompliance>, compliance: Pubkey) -> Result<()> {

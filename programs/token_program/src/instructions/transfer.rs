@@ -53,29 +53,31 @@ pub struct TransferTokens<'info> {
 pub fn transfer_tokens(ctx: Context<TransferTokens>, amount: u64) -> Result<()> {
     msg!("Verifying compliance before transfer...");
 
-    // Create instruction for the modular_compliance program
     let instruction = Instruction {
         program_id: ctx.accounts.compliance_program.key(),
-        accounts: vec![AccountMeta::new_readonly(
-            ctx.accounts.compliance_state.key(),
-            false,
-        )],
-        // Parameters can be added here if needed
+        accounts: vec![
+            AccountMeta::new_readonly(ctx.accounts.compliance_state.key(), false),
+            AccountMeta::new_readonly(ctx.accounts.sender.key(), true), // Passa o sender explicitamente
+        ],
         data: vec![],
     };
 
-    // Execute the CPI call to the compliance module
-    invoke(
+    let compliance_result = invoke(
         &instruction,
         &[
             ctx.accounts.compliance_program.to_account_info(),
             ctx.accounts.compliance_state.to_account_info(),
         ],
-    )?;
+    );
 
-    msg!("Compliance verificado com sucesso! Prosseguindo com a transferência.");
+    if compliance_result.is_err() {
+        msg!("🚫 Compliance check failed. Transfer aborted.");
+        return Err(ProgramError::Custom(99).into());
+    }
 
-    // Now we can execute the transfer
+    msg!("✅ Compliance verificado com sucesso! Prosseguindo com a transferência.");
+
+    // Agora podemos executar a transferência
     transfer(
         CpiContext::new(
             ctx.accounts.token_program.to_account_info(),
@@ -88,6 +90,6 @@ pub fn transfer_tokens(ctx: Context<TransferTokens>, amount: u64) -> Result<()> 
         amount * 10u64.pow(ctx.accounts.mint_account.decimals as u32),
     )?;
 
-    msg!("Tokens transferidos com sucesso.");
+    msg!("✅ Tokens transferidos com sucesso.");
     Ok(())
 }

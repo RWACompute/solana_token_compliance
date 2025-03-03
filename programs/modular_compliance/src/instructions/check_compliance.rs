@@ -23,14 +23,17 @@ pub fn process_check_compliance(ctx: Context<CheckCompliance>, user: Pubkey) -> 
 }
 
 fn check_module_compliance(module: Pubkey, user: Pubkey) -> Result<bool> {
-    let _accounts: Vec<AccountInfo> = vec![];
-
     let instruction = Instruction {
         program_id: module,
-        accounts: vec![AccountMeta::new(user, false)],
+        accounts: vec![AccountMeta::new_readonly(user, false)],
         data: vec![],
     };
 
-    invoke(&instruction, &[]).map_err(|_| ProgramError::Custom(1))?;
-    Ok(true)
+    match invoke(&instruction, &[]) {
+        Ok(_) => Ok(true),
+        Err(_) => {
+            msg!("🚫 Compliance check failed for module: {}", module);
+            Err(ProgramError::Custom(1).into())
+        }
+    }
 }
