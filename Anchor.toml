@@ -2,8 +2,8 @@
 
 [workspace]
 members = [
-    "programs/geo_restrict_module",
-    "programs/kyc_module",
+    "programs/modules/geo_restrict_module",
+    "programs/modules/kyc_module",
     "programs/modular_compliance",
     "programs/token_program",
 ]
@@ -27,7 +27,7 @@ cluster = "Localnet"
 wallet = "./wallets/phantom-keypair.json"
 
 [scripts]
-test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+test = "yarn run ts-mocha -p ./tsconfig.json -t 1000000 tests/test.spec.ts"
 
 [[test.genesis]]
 address = "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"

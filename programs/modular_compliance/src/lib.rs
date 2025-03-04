@@ -28,7 +28,7 @@ pub mod modular_compliance {
         process_remove_module(ctx, module)
     }
 
-    pub fn check_compliance(ctx: Context<CheckCompliance>, user: Pubkey) -> Result<bool> {
-        process_check_compliance(ctx, user)
+    pub fn check_compliance(ctx: Context<CheckCompliance>) -> Result<bool> {
+        process_check_compliance(ctx)
     }
 }

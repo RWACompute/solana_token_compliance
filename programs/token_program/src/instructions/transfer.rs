@@ -7,6 +7,7 @@ use anchor_spl::{
     associated_token::AssociatedToken,
     token::{transfer, Mint, Token, TokenAccount, Transfer},
 };
+use modular_compliance::state::ComplianceState;
 use std::str::FromStr;
 
 #[derive(Accounts)]
@@ -47,19 +48,23 @@ pub struct TransferTokens<'info> {
 
     /// CHECK: Compliance state (passed to the modular_compliance program)
     #[account(mut)]
-    pub compliance_state: AccountInfo<'info>,
+    pub compliance_state: Account<'info, ComplianceState>,
 }
 
 pub fn transfer_tokens(ctx: Context<TransferTokens>, amount: u64) -> Result<()> {
     msg!("Verifying compliance before transfer...");
 
+    // CHECK: Discriminador correto de checkCompliance
+    let mut data = vec![233, 217, 116, 46, 226, 224, 62, 42];
+    data.extend_from_slice(ctx.accounts.sender.key().as_ref());
+
     let instruction = Instruction {
         program_id: ctx.accounts.compliance_program.key(),
         accounts: vec![
             AccountMeta::new_readonly(ctx.accounts.compliance_state.key(), false),
-            AccountMeta::new_readonly(ctx.accounts.sender.key(), true), // Passa o sender explicitamente
+            AccountMeta::new_readonly(ctx.accounts.sender.key(), false),
         ],
-        data: vec![],
+        data,
     };
 
     let compliance_result = invoke(
@@ -71,7 +76,7 @@ pub fn transfer_tokens(ctx: Context<TransferTokens>, amount: u64) -> Result<()> 
     );
 
     if compliance_result.is_err() {
-        msg!("🚫 Compliance check failed. Transfer aborted.");
+        msg!("🚫 Compliance check falhou. Transferência abortada.");
         return Err(ProgramError::Custom(99).into());
     }
 

@@ -1,6 +1,9 @@
 [workspace]
 members = [
-    "programs/*"
+    "programs/modular_compliance",
+    "programs/modules/geo_restrict_module",
+    "programs/modules/kyc_module",
+    "programs/token_program",
 ]
 resolver = "2"
 

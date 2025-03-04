@@ -6,14 +6,27 @@ use solana_program::pubkey::Pubkey;
 
 #[derive(Accounts)]
 pub struct CheckCompliance<'info> {
+    #[account(mut)]
     pub compliance_state: Account<'info, ComplianceState>,
+
+    /// CHECK: Este account será passado dinamicamente para os módulos
+    #[account(signer)]
+    pub user: UncheckedAccount<'info>,
+
+    /// CHECK: O estado do usuário no módulo de geolocalização
+    #[account(mut)]
+    pub user_geo_state: UncheckedAccount<'info>,
 }
 
-pub fn process_check_compliance(ctx: Context<CheckCompliance>, user: Pubkey) -> Result<bool> {
+pub fn process_check_compliance(ctx: Context<CheckCompliance>) -> Result<bool> {
     let compliance_state = &ctx.accounts.compliance_state;
 
     for module in &compliance_state.modules {
-        let is_compliant = check_module_compliance(*module, user)?;
+        let is_compliant = check_module_compliance(
+            *module,
+            ctx.accounts.user.key(),
+            ctx.accounts.user_geo_state.key(),
+        )?;
         if !is_compliant {
             return Ok(false);
         }
@@ -22,10 +35,13 @@ pub fn process_check_compliance(ctx: Context<CheckCompliance>, user: Pubkey) -> 
     Ok(true)
 }
 
-fn check_module_compliance(module: Pubkey, user: Pubkey) -> Result<bool> {
+fn check_module_compliance(module: Pubkey, user: Pubkey, user_geo_state: Pubkey) -> Result<bool> {
     let instruction = Instruction {
         program_id: module,
-        accounts: vec![AccountMeta::new_readonly(user, false)],
+        accounts: vec![
+            AccountMeta::new_readonly(user, false),
+            AccountMeta::new_readonly(user_geo_state, false),
+        ],
         data: vec![],
     };
 
